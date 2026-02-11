@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>💘</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #fff0f5;
+      padding-top: 100px;
+    }
+    button {
+      font-size: 20px;
+      padding: 15px 30px;
+      background: pink;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #msg {
+      margin-top: 30px;
+      font-size: 24px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>יש לי משהו להגיד לך 💌</h1>
+  <button onclick="showLove()">תלחץ כאן</button>
+
+  <div id="msg">
+    אני אוהבת אותך הכי בעולם ❤️  
+    <br><br>
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+  </div>
+
+  <script>
+    function showLove() {
+      document.getElementById("msg").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
