@@ -9,7 +9,7 @@
 body{
   font-family: Arial;
   text-align:center;
-  background: linear-gradient(pink,#ffe6f0);
+  background: #ffdde1; /* רקע ורוד אחיד בהיר */
   overflow:hidden;
   display:flex;
   flex-direction:column;
@@ -66,6 +66,7 @@ input{
   position:absolute;
   top:-2vw;
   left:105%;
+  white-space:nowrap; /* לא יתפצל לשורה */
 }
 </style>
 </head>
@@ -83,26 +84,30 @@ input{
 
 <!-- תגובה -->
 <div id="s2" class="screen">
-<h1>סתםםם אני יודעת מה השם שלךךךך מיי לאבבב 😘</h1>
+<h1>😘 סתםםם אני יודעת מה השם שלךךךך מיי לאבבב </h1>
 <button onclick="next(3)">המשך</button>
 </div>
 
 <!-- שאלה 1 -->
 <div id="s3" class="screen">
 <h2>מי הכי אוהבת אותך בעולם?</h2>
-<button onclick="q1Correct(this)">אני</button>
-<button onclick="q1Wrong(this)">סתם ידידה</button>
-<button onclick="q1Wrong(this)">בן אדם רנדומלי שלא מכיר אותך</button>
-<button onclick="q1Wrong(this)">השכן שלך</button>
+<div style="position:relative; display:flex; flex-direction:column; gap:4vw; align-items:center;">
+  <button onclick="q1Correct(this)">אני</button>
+  <button onclick="q1Wrong(this)">סתם ידידה</button>
+  <button onclick="q1Wrong(this)">בן אדם רנדומלי שלא מכיר אותך</button>
+  <button onclick="q1Wrong(this)">השכן שלך</button>
+</div>
 </div>
 
 <!-- שאלה 2 -->
 <div id="s4" class="screen">
 <h2>מי הכי אוהב אותי (אליסה) בעולם?</h2>
-<button onclick="q2Correct(this)">אתה</button>
-<button onclick="q2Wrong(this)">סתם ידיד</button>
-<button onclick="q2Wrong(this)">בן אדם רנדומלי שלא מכיר אותך</button>
-<button onclick="q2Wrong(this)">השכן שלי</button>
+<div style="position:relative; display:flex; flex-direction:column; gap:4vw; align-items:center;">
+  <button onclick="q2Correct(this)">אתה</button>
+  <button onclick="q2Wrong(this)">סתם ידיד</button>
+  <button onclick="q2Wrong(this)">בן אדם רנדומלי שלא מכיר אותך</button>
+  <button onclick="q2Wrong(this)">השכן שלי</button>
+</div>
 </div>
 
 <!-- שאלה 3 -->
@@ -116,11 +121,6 @@ input{
 <div id="s6" class="screen">
 <h1>💖 נכון אהובי כל הכבוד צדקת בהכל 💖<br>ולנטיין שמח love u</h1>
 <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
-<br>
-<audio id="music" controls autoplay>
-  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes/Happy_Music/Scott_Holmes_-_Shape_of_You_Cover.mp3" type="audio/mpeg">
-  הדפדפן שלך לא תומך בניגון מוזיקה.
-</audio>
 </div>
 
 <script>
@@ -138,10 +138,12 @@ function q1Correct(btn){
   next(4);
 }
 function q1Wrong(btn){
-  const notes = ["חח לא","ממש לא","נראה לך יהזוי אחד","🤪 לא קרוב"];
+  const notes = ["חח לא","ממש לא","נראה לך יהזוי אחד","לא קרוב"];
   const note = document.createElement("span");
   note.className="note";
   note.innerText=notes[Math.floor(Math.random()*notes.length)];
+  // אם כבר יש הערה על הכפתור - לא מוסיפים עוד
+  if(btn.querySelector(".note")) return;
   btn.appendChild(note);
   btn.style.position="absolute";
   btn.style.top=Math.random()*60 + "%";
@@ -154,10 +156,11 @@ function q2Correct(btn){
   next(5);
 }
 function q2Wrong(btn){
-  const notes = ["חח לא","ממש לא","נראה לך יהזוי אחד","😂 לא"];
+  const notes = ["חח","ממש לא","יש ה אנשים הזויים","לא"];
   const note = document.createElement("span");
   note.className="note";
   note.innerText=notes[Math.floor(Math.random()*notes.length)];
+  if(btn.querySelector(".note")) return;
   btn.appendChild(note);
   btn.style.position="absolute";
   btn.style.top=Math.random()*60 + "%";
@@ -195,3 +198,4 @@ function hearts(){
 
 </body>
 </html>
+
