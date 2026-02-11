@@ -70,10 +70,12 @@ input{
   font-size:3vw;
   color:#000;
   position:absolute;
-  top:-2vw;
+  top:-3vw; /* מעט יותר למעלה */
   left:0;
   width:100%;
 }
+
+#s5 div{ margin-top:8vw; } /* הורדת הכפתורים בשאלה 3 קצת למטה */
 </style>
 </head>
 
@@ -89,7 +91,7 @@ input{
 </div>
 
 <div id="s2" class="screen">
-<h1>😘 סתםםם אני יודעת מה השם שלךךךך מיי לאבבב </h1>
+<h1>סתםםם אני יודעת מה השם שלךךךך מיי לאבבב 😘</h1>
 <button onclick="next(3)">המשך</button>
 </div>
 
@@ -115,8 +117,10 @@ input{
 
 <div id="s5" class="screen">
 <h2>מי אוהב את מי יותר?</h2>
+<div>
 <button id="alisaBtn" onclick="win()">אני (אליסה)</button>
 <button id="yBtn" onclick="shrink()">אתה (ירין)</button>
+</div>
 </div>
 
 <div id="s6" class="screen">
@@ -175,6 +179,7 @@ function shrink(){
     document.getElementById("yBtn").style.display="none";
   }
 }
+
 function win(){
   next(6);
   hearts();
