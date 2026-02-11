@@ -2,7 +2,8 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8">
-<title> 💘</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ולנטיין 💘</title>
 
 <style>
 body{
@@ -10,27 +11,34 @@ body{
   text-align:center;
   background: linear-gradient(pink,#ffe6f0);
   overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:5vw;
 }
 
-.screen{ display:none; padding-top:100px; }
+.screen{ display:none; padding-top:10vw; }
 .show{ display:block; }
 
 button{
-  font-size:20px;
-  padding:15px 25px;
-  margin:10px;
+  font-size:5vw;
+  padding:3vw 5vw;
+  margin:3vw;
   border:none;
   border-radius:12px;
   cursor:pointer;
   background:#ff4da6;
   color:white;
+  position:relative;
 }
 
 input{
-  padding:12px;
-  font-size:18px;
+  padding:3vw;
+  font-size:4vw;
   border-radius:10px;
   border:1px solid #ccc;
+  width:80%;
 }
 
 #alisaBtn{ transition:0.3s; }
@@ -38,12 +46,26 @@ input{
 .heart{
   position:fixed;
   top:-20px;
-  font-size:24px;
+  font-size:6vw;
   animation:fall 3s linear infinite;
 }
 
 @keyframes fall{
   to{ transform:translateY(110vh); opacity:0;}
+}
+
+@media screen and (max-width:400px){
+  button{ font-size:6vw; padding:4vw 6vw; }
+  input{ width:90%; font-size:5vw; padding:4vw; }
+  h1,h2{ font-size:7vw; }
+}
+
+.note{
+  font-size:3vw;
+  color:#000;
+  position:absolute;
+  top:-2vw;
+  left:105%;
 }
 </style>
 </head>
@@ -68,19 +90,19 @@ input{
 <!-- שאלה 1 -->
 <div id="s3" class="screen">
 <h2>מי הכי אוהבת אותך בעולם?</h2>
-<button onclick="next(4)">אני</button>
-<button onclick="next(4)">אני</button>
-<button onclick="next(4)">אני</button>
-<button onclick="next(4)">אני</button>
+<button onclick="q1Correct(this)">אני</button>
+<button onclick="q1Wrong(this)">סתם ידידה</button>
+<button onclick="q1Wrong(this)">בן אדם רנדומלי שלא מכיר אותך</button>
+<button onclick="q1Wrong(this)">השכן שלך</button>
 </div>
 
 <!-- שאלה 2 -->
 <div id="s4" class="screen">
 <h2>מי הכי אוהב אותי (אליסה) בעולם?</h2>
-<button onclick="popup()">אתה</button>
-<button onclick="popup()">אתה</button>
-<button onclick="popup()">אתה</button>
-<button onclick="popup()">אתה</button>
+<button onclick="q2Correct(this)">אתה</button>
+<button onclick="q2Wrong(this)">סתם ידיד</button>
+<button onclick="q2Wrong(this)">בן אדם רנדומלי שלא מכיר אותך</button>
+<button onclick="q2Wrong(this)">השכן שלי</button>
 </div>
 
 <!-- שאלה 3 -->
@@ -93,58 +115,83 @@ input{
 <!-- מסך סיום -->
 <div id="s6" class="screen">
 <h1>💖 נכון אהובי כל הכבוד צדקת בהכל 💖<br>ולנטיין שמח love u</h1>
-
 <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
-
+<br>
+<audio id="music" controls autoplay>
+  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes/Happy_Music/Scott_Holmes_-_Shape_of_You_Cover.mp3" type="audio/mpeg">
+  הדפדפן שלך לא תומך בניגון מוזיקה.
+</audio>
 </div>
 
 <script>
-
 function next(n){
-document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"));
-document.getElementById("s"+n).classList.add("show");
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"));
+  document.getElementById("s"+n).classList.add("show");
 }
 
 function checkName(){
-next(2);
+  next(2);
 }
 
-function popup(){
-alert("כל הכבוד מאמי תמשיך ככה!");
-next(5);
+// ======= שאלה 1 =======
+function q1Correct(btn){
+  next(4);
+}
+function q1Wrong(btn){
+  const notes = ["חח לא","ממש לא","נראה לך יהזוי אחד","🤪 לא קרוב"];
+  const note = document.createElement("span");
+  note.className="note";
+  note.innerText=notes[Math.floor(Math.random()*notes.length)];
+  btn.appendChild(note);
+  btn.style.position="absolute";
+  btn.style.top=Math.random()*60 + "%";
+  btn.style.left=Math.random()*60 + "%";
 }
 
+// ======= שאלה 2 =======
+function q2Correct(btn){
+  alert("כל הכבוד מאמי תמשיך ככה!");
+  next(5);
+}
+function q2Wrong(btn){
+  const notes = ["חח לא","ממש לא","נראה לך יהזוי אחד","😂 לא"];
+  const note = document.createElement("span");
+  note.className="note";
+  note.innerText=notes[Math.floor(Math.random()*notes.length)];
+  btn.appendChild(note);
+  btn.style.position="absolute";
+  btn.style.top=Math.random()*60 + "%";
+  btn.style.left=Math.random()*60 + "%";
+}
+
+// ======= שאלה 3 =======
 let size=1;
-
 function shrink(){
-size+=0.3;
-document.getElementById("alisaBtn").style.transform="scale("+size+")";
-document.getElementById("yBtn").style.transform="scale("+(1/size)+")";
-
-if(size>3){
-document.getElementById("yBtn").style.display="none";
+  size+=0.3;
+  document.getElementById("alisaBtn").style.transform="scale("+size+")";
+  document.getElementById("yBtn").style.transform="scale("+(1/size)+")";
+  if(size>3){
+    document.getElementById("yBtn").style.display="none";
+  }
 }
-}
-
 function win(){
-next(6);
-hearts();
+  next(6);
+  hearts();
 }
 
+// ======= אנימציית לבבות =======
 function hearts(){
-setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤️";
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(20+Math.random()*30)+"px";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),3000);
-},200);
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(6+Math.random()*6)+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+  },200);
 }
-
 </script>
 
 </body>
 </html>
-
