@@ -9,7 +9,7 @@
 body{
   font-family: Arial, sans-serif;
   text-align:center;
-  background: #ffdde1; /* רקע ורוד אחיד */
+  background: #ffdde1;
   overflow:hidden;
   display:flex;
   flex-direction:column;
@@ -70,7 +70,7 @@ input{
   font-size:3vw;
   color:#000;
   position:absolute;
-  top:-2vw; /* מעל הכפתור */
+  top:-2vw;
   left:0;
   width:100%;
 }
@@ -79,7 +79,6 @@ input{
 
 <body>
 
-<!-- מסך פתיחה -->
 <div id="s1" class="screen show">
 <h1>💘 לכבוד הולנטיינס 💘</h1>
 <h2>הכנס שם:</h2>
@@ -89,13 +88,11 @@ input{
 <button onclick="checkName()">אשר</button>
 </div>
 
-<!-- תגובה -->
 <div id="s2" class="screen">
-<h1>סתםםם אני יודעת מה השם שלךךךך מיי לאבבב 😘</h1>
+<h1>😘 סתםםם אני יודעת מה השם שלךךךך מיי לאבבב </h1>
 <button onclick="next(3)">המשך</button>
 </div>
 
-<!-- שאלה 1 -->
 <div id="s3" class="screen">
 <h2>מי הכי אוהבת אותך בעולם?</h2>
 <div style="position:relative; display:flex; flex-direction:column; gap:4vw; align-items:center;">
@@ -106,7 +103,6 @@ input{
 </div>
 </div>
 
-<!-- שאלה 2 -->
 <div id="s4" class="screen">
 <h2>מי הכי אוהב אותי (אליסה) בעולם?</h2>
 <div style="position:relative; display:flex; flex-direction:column; gap:4vw; align-items:center;">
@@ -117,14 +113,12 @@ input{
 </div>
 </div>
 
-<!-- שאלה 3 -->
 <div id="s5" class="screen">
 <h2>מי אוהב את מי יותר?</h2>
 <button id="alisaBtn" onclick="win()">אני (אליסה)</button>
 <button id="yBtn" onclick="shrink()">אתה (ירין)</button>
 </div>
 
-<!-- מסך סיום -->
 <div id="s6" class="screen">
 <h1>💖 נכון אהובי כל הכבוד צדקת בהכל 💖<br> love u</h1>
 <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
@@ -136,19 +130,17 @@ function next(n){
   document.getElementById("s"+n).classList.add("show");
 }
 
-// ======= בדיקה שם =======
 function checkName(){
   const name = document.getElementById("nameInput").value.trim();
   const error = document.getElementById("errorMsg");
   if(name === ""){
-    error.innerText = "*תכתוב תשם שלךךךךך נוווו";
+    error.innerText = "תכתוב תשם שלךךךךך נוווו";
   } else {
     error.innerText = "";
     next(2);
   }
 }
 
-// ======= שאלה 1 =======
 function q1Correct(btn){
   next(4);
 }
@@ -161,7 +153,6 @@ function q1Wrong(btn){
   btn.appendChild(note);
 }
 
-// ======= שאלה 2 =======
 function q2Correct(btn){
   alert("כל הכבוד מאמי תמשיך ככה! 😘");
   next(5);
@@ -175,7 +166,6 @@ function q2Wrong(btn){
   btn.appendChild(note);
 }
 
-// ======= שאלה 3 =======
 let size=1;
 function shrink(){
   size+=0.3;
@@ -190,7 +180,6 @@ function win(){
   hearts();
 }
 
-// ======= אנימציית לבבות =======
 function hearts(){
   setInterval(()=>{
     let h=document.createElement("div");
