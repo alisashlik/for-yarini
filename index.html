@@ -1,46 +1,150 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-  <meta charset="UTF-8">
-  <title>💘</title>
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      background: #fff0f5;
-      padding-top: 100px;
-    }
-    button {
-      font-size: 20px;
-      padding: 15px 30px;
-      background: pink;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    #msg {
-      margin-top: 30px;
-      font-size: 24px;
-      display: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<title> 💘</title>
+
+<style>
+body{
+  font-family: Arial;
+  text-align:center;
+  background: linear-gradient(pink,#ffe6f0);
+  overflow:hidden;
+}
+
+.screen{ display:none; padding-top:100px; }
+.show{ display:block; }
+
+button{
+  font-size:20px;
+  padding:15px 25px;
+  margin:10px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:#ff4da6;
+  color:white;
+}
+
+input{
+  padding:12px;
+  font-size:18px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+#alisaBtn{ transition:0.3s; }
+
+.heart{
+  position:fixed;
+  top:-20px;
+  font-size:24px;
+  animation:fall 3s linear infinite;
+}
+
+@keyframes fall{
+  to{ transform:translateY(110vh); opacity:0;}
+}
+</style>
 </head>
+
 <body>
 
-  <h1>יש לי משהו להגיד לך 💌</h1>
-  <button onclick="showLove()">תלחץ כאן</button>
+<!-- מסך פתיחה -->
+<div id="s1" class="screen show">
+<h1>💘 לכבוד הולנטיינס 💘</h1>
+<h2>הכנס שם:</h2>
+<input id="nameInput">
+<br><br>
+<button onclick="checkName()">אשר</button>
+</div>
 
-  <div id="msg">
-    אני אוהבת אותך הכי בעולם ❤️  
-    <br><br>
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
-  </div>
+<!-- תגובה -->
+<div id="s2" class="screen">
+<h1>סתםםם אני יודעת מה השם שלךךךך מיי לאבבב 😘</h1>
+<button onclick="next(3)">המשך</button>
+</div>
 
-  <script>
-    function showLove() {
-      document.getElementById("msg").style.display = "block";
-    }
-  </script>
+<!-- שאלה 1 -->
+<div id="s3" class="screen">
+<h2>מי הכי אוהבת אותך בעולם?</h2>
+<button onclick="next(4)">אני</button>
+<button onclick="next(4)">אני</button>
+<button onclick="next(4)">אני</button>
+<button onclick="next(4)">אני</button>
+</div>
+
+<!-- שאלה 2 -->
+<div id="s4" class="screen">
+<h2>מי הכי אוהב אותי (אליסה) בעולם?</h2>
+<button onclick="popup()">אתה</button>
+<button onclick="popup()">אתה</button>
+<button onclick="popup()">אתה</button>
+<button onclick="popup()">אתה</button>
+</div>
+
+<!-- שאלה 3 -->
+<div id="s5" class="screen">
+<h2>מי אוהב את מי יותר?</h2>
+<button id="alisaBtn" onclick="win()">אני (אליסה)</button>
+<button id="yBtn" onclick="shrink()">אתה (ירין)</button>
+</div>
+
+<!-- מסך סיום -->
+<div id="s6" class="screen">
+<h1>💖 נכון אהובי כל הכבוד צדקת בהכל 💖<br>ולנטיין שמח love u</h1>
+
+<img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+
+</div>
+
+<script>
+
+function next(n){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"));
+document.getElementById("s"+n).classList.add("show");
+}
+
+function checkName(){
+next(2);
+}
+
+function popup(){
+alert("כל הכבוד מאמי תמשיך ככה!");
+next(5);
+}
+
+let size=1;
+
+function shrink(){
+size+=0.3;
+document.getElementById("alisaBtn").style.transform="scale("+size+")";
+document.getElementById("yBtn").style.transform="scale("+(1/size)+")";
+
+if(size>3){
+document.getElementById("yBtn").style.display="none";
+}
+}
+
+function win(){
+next(6);
+hearts();
+}
+
+function hearts(){
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*30)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),3000);
+},200);
+}
+
+</script>
 
 </body>
 </html>
+
