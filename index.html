@@ -41,6 +41,12 @@ input{
   width:80%;
 }
 
+#errorMsg{
+  color:red;
+  font-size:4vw;
+  margin-top:2vw;
+}
+
 #alisaBtn{ transition:0.3s; }
 
 .heart{
@@ -64,9 +70,9 @@ input{
   font-size:3vw;
   color:#000;
   position:absolute;
-  top:0;
-  left:105%; /* תמיד בצד ימין של הכפתור */
-  white-space:nowrap;
+  top:-2vw; /* מעל הכפתור */
+  left:0;
+  width:100%;
 }
 </style>
 </head>
@@ -76,21 +82,22 @@ input{
 <!-- מסך פתיחה -->
 <div id="s1" class="screen show">
 <h1>💘 לכבוד הולנטיינס 💘</h1>
-<h2>:הכנס שם</h2>
+<h2>הכנס שם:</h2>
 <input id="nameInput">
-<br><br>
+<div id="errorMsg"></div>
+<br>
 <button onclick="checkName()">אשר</button>
 </div>
 
 <!-- תגובה -->
 <div id="s2" class="screen">
-<h1> 😘סתםםם אני יודעת מה השם שלךךךך מיי לאבבב </h1>
+<h1>סתםםם אני יודעת מה השם שלךךךך מיי לאבבב 😘</h1>
 <button onclick="next(3)">המשך</button>
 </div>
 
 <!-- שאלה 1 -->
 <div id="s3" class="screen">
-<h2>?מי הכי אוהבת אותך בעולם</h2>
+<h2>מי הכי אוהבת אותך בעולם?</h2>
 <div style="position:relative; display:flex; flex-direction:column; gap:4vw; align-items:center;">
   <button onclick="q1Correct(this)">אני</button>
   <button onclick="q1Wrong(this)">סתם ידידה</button>
@@ -101,7 +108,7 @@ input{
 
 <!-- שאלה 2 -->
 <div id="s4" class="screen">
-<h2>?מי הכי אוהב אותי (אליסה) בעולם</h2>
+<h2>מי הכי אוהב אותי (אליסה) בעולם?</h2>
 <div style="position:relative; display:flex; flex-direction:column; gap:4vw; align-items:center;">
   <button onclick="q2Correct(this)">אתה</button>
   <button onclick="q2Wrong(this)">סתם ידיד</button>
@@ -112,7 +119,7 @@ input{
 
 <!-- שאלה 3 -->
 <div id="s5" class="screen">
-<h2>?מי אוהב את מי יותר</h2>
+<h2>מי אוהב את מי יותר?</h2>
 <button id="alisaBtn" onclick="win()">אני (אליסה)</button>
 <button id="yBtn" onclick="shrink()">אתה (ירין)</button>
 </div>
@@ -129,8 +136,16 @@ function next(n){
   document.getElementById("s"+n).classList.add("show");
 }
 
+// ======= בדיקה שם =======
 function checkName(){
-  next(2);
+  const name = document.getElementById("nameInput").value.trim();
+  const error = document.getElementById("errorMsg");
+  if(name === ""){
+    error.innerText = "*תכתוב תשם שלךךךךך נוווו";
+  } else {
+    error.innerText = "";
+    next(2);
+  }
 }
 
 // ======= שאלה 1 =======
@@ -148,11 +163,11 @@ function q1Wrong(btn){
 
 // ======= שאלה 2 =======
 function q2Correct(btn){
-  alert("כל הכבוד מאמי תמשיך ככה!");
+  alert("כל הכבוד מאמי תמשיך ככה! 😘");
   next(5);
 }
 function q2Wrong(btn){
-  const notes = ["חח","ממש לא","יש אנשים הזויים","לא"];
+  const notes = ["חחח","ממש לא","יש פה אנשים הזויים","לאאא"];
   if(btn.querySelector(".note")) return;
   const note = document.createElement("span");
   note.className="note";
